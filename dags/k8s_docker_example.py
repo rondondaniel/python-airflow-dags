@@ -10,11 +10,12 @@ with DAG(
 ) as dag:
 
     run_docker_image = KubernetesPodOperator(
-        namespace="default",
+        namespace="airflow",
         image="hello-world",
         cmds=[],  # hello-world runs its default command, so cmds can be left empty or omitted
         name="run-docker-image",
         task_id="run_docker_image",
-        is_delete_operator_pod=True,
+        on_finish_action="delete_pod",
+        in_cluster=True,
         get_logs=True,
     )

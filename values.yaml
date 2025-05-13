@@ -9,3 +9,7 @@ dags:
     depth: 1
     wait: 60  # Sync interval in seconds
     subPath: "dags"  # DAGs are in the 'dags/' folder of the repo
+
+airflow:
+  extraPipPackages:
+    - apache-airflow-providers-cncf-kubernetes

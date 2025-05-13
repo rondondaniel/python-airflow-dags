@@ -1,0 +1,20 @@
+from datetime import datetime
+from airflow import DAG
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+
+with DAG(
+    dag_id="k8s_docker_example",
+    schedule_interval=None,
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+) as dag:
+
+    run_docker_image = KubernetesPodOperator(
+        namespace="default",
+        image="hello-world",
+        cmds=[],  # hello-world runs its default command, so cmds can be left empty or omitted
+        name="run-docker-image",
+        task_id="run_docker_image",
+        is_delete_operator_pod=True,
+        get_logs=True,
+    )

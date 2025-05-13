@@ -18,14 +18,14 @@ with DAG(dag_id="demo", start_date=datetime(2022, 1, 1), schedule="0 0 * * *") a
         print("Hello from Airflow python operator!")
 
     t2 = PythonOperator(
-        task_id="airflow",
+        task_id="airflow_python_operator",
         python_callable=new_airflow
     )
 
     @task()
-    def new_airflow():
+    def airflow():
         print(datetime.now())
         print("Hello from Airflow!")
 
     # Set dependencies between tasks
-    hello >> airflow()
+    hello >> airflow() >> t2

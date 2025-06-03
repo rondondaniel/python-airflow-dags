@@ -12,7 +12,7 @@ with DAG(
     run_docker_image = KubernetesPodOperator(
         task_id="run_docker_image",
         namespace="airflow",
-        image="ghcr.io/rondondaniel/python-actoins-test:sha256-9e99f2d74f9740527a09087450e76cf7a24e2ccb3ae0e8f626675650f94cbee0.sig",
+        image=" ghcr.io/rondondaniel/python-actoins-test:latest",
         cmds=[],  # hello-world runs its default command, so cmds can be left empty or omitted
         name="run-docker-image",
         on_finish_action="delete_pod",

@@ -12,8 +12,9 @@ with DAG(
     run_docker_image = KubernetesPodOperator(
         task_id="run_docker_image",
         namespace="airflow",
-        image="ghcr.io/rondondaniel/python-actoins-test:latest",
+        image="ghcr.io/rondondaniel/python-actoins-test:main",
         cmds=["python", "hello_world.py"],
+        container_resources={"node_selectors": {"kubernetes.io/arch": "amd64"}},
         name="run-docker-image",
         on_finish_action="delete_pod",
         in_cluster=True,
